@@ -1,0 +1,13 @@
+{
+  "name": "mailopinion",
+  "private": true,
+  "scripts": {
+    "build": "gridsome build",
+    "develop": "gridsome develop",
+    "explore": "gridsome explore"
+  },
+  "dependencies": {
+    "gridsome": "^0.7.0",
+    "gridsome-plugin-i18n": "^1.6.0"
+  }
+}
