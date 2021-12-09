@@ -9,5 +9,9 @@
   "dependencies": {
     "gridsome": "^0.7.0",
     "gridsome-plugin-i18n": "^1.6.0"
+  },
+  "devDependencies": {
+    "sass": "^1.44.0",
+    "sass-loader": "^10.1.1"
   }
 }
