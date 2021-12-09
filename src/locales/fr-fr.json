@@ -1,0 +1,11 @@
+{
+    "landing": {
+        "benefits": {
+            "title": "Avantages",
+            "free": {
+                "title": "Gratuit",
+                "content": "Conçu avec firebase, le service est proposé gratuitement avec toutes ses fonctionnalités."
+            }
+        }
+    }
+}

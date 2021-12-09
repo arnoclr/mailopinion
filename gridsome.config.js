@@ -6,5 +6,23 @@
 
 module.exports = {
   siteName: 'Gridsome',
-  plugins: []
+  plugins: [
+    {
+      use: "gridsome-plugin-i18n",
+      options: {
+        locales: [ // locales list
+          'fr-fr',
+          'en-us'
+        ],
+        pathAliases: { // path segment alias for each locales
+          'fr-fr': 'fr',
+          'en-us': 'en'
+        },
+        fallbackLocale: 'en-us', // fallback language
+        defaultLocale: 'en-us', // default language
+        enablePathRewrite: true, // rewrite path with locale prefix, default: true
+        rewriteDefaultLanguage: true // rewrite default locale, default: true
+      }
+    }
+  ]
 }
