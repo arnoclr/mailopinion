@@ -4,9 +4,9 @@
             Show website with your browser language ({{ browserLocale }}).
         </div>
         <nav class="mo-nav">
-            <div class="mo-nav__brand">
+            <g-link :to="$tp('/?s=nav_logo')" class="mo-nav__brand">
                 <img src="/img/logo.full.svg" alt="Mailopinion logo">
-            </div>
+            </g-link>
             <div class="mo-nav__buttons">
                 <div class="mo-btn mo-btn--margoff">{{ $t('landing.adminConsole') }}</div>
                 <g-link :to="$tp('/get-started/?s=nav_cta')" class="mo-btn mo-btn--backcolored">{{ $t('landing.getStarted') }}</g-link>
