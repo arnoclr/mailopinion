@@ -1,10 +1,48 @@
 {
     "landing": {
+        "getStarted": "Commencer",
+        "adminConsole": "Console d'administration",
+        "why": {
+            "question": "Pourquoi mailopinion ?",
+            "title": "Mailopinion est un service gratuit qui vous permet de mesurer la qualité de vos emails.",
+            "content": "Simple à mettre en place, et utilisable facilement par l’utilisateur, il vous permettra de récolter des notes sur vos emails à travers des smileys ou des pouces, sans que l’utilisateur ne perde de temps."
+        },
         "benefits": {
-            "title": "Avantages",
+            "title": "Les avantages de Mailopinion",
             "free": {
                 "title": "Gratuit",
                 "content": "Conçu avec firebase, le service est proposé gratuitement avec toutes ses fonctionnalités."
+            },
+            "transparent": {
+                "title": "Transparent",
+                "content": "Il s'intègre parfaitement dans n’importe quel email, et ne demande qu’un seul clic aux utilisateurs."
+            },
+            "fast": {
+                "title": "Rapide",
+                "content": "Le système est très rapide à mettre en place et à intégrer dans vos emails, quel que soit le nombre d’emails."
+            }
+        },
+        "features": {
+            "title": "Fonctionnalités",
+            "campaigns": {
+                "title": "Campagnes",
+                "content": "Créez plusieurs campagnes avec des notations différentes sur un même compte."
+            },
+            "comments": {
+                "title": "Commentaires",
+                "content": "Les utilisateurs peuvent laisser un avis après avoir cliqué sur la note."
+            },
+            "analytics": {
+                "title": "Visualisation",
+                "content": "Analysez les résultats de façon claire à l’aide de graphiques et des moyennes."
+            },
+            "flexible": {
+                "title": "Flexible",
+                "content": "Plusieurs widgets sont proposés, avec des smileys ou des pouces."
+            },
+            "versatile": {
+                "title": "Polyvalent",
+                "content": "Utile pour les emails, ce système peut aussi être intégré dans des documents statiques (ex. PDF)."
             }
         }
     }

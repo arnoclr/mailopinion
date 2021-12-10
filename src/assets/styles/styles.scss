@@ -1,8 +1,35 @@
-h2 {
+$color-primary: #1a73e8;
+$color-primary-dark: #185abc;
+
+@mixin ff () {
     font-family: Outfit, sans-serif;
-    font-size: 2.1rem;
+}
+
+// global
+@import "buttons.scss";
+@import "footer.scss";
+@import "navbar.scss";
+
+// pages
+@import "landing.scss";
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.mo-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+h1, h2 {
+    font-family: Outfit, sans-serif;
+    font-size: 36px;
+    line-height: 44px;
     font-weight: 350;
-    line-height: 1.2;
 }
 
 p {
