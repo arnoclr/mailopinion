@@ -6,7 +6,9 @@
     justify-content: space-between;
 
     &__brand {
-
+        img {
+            user-select: none;
+        }
     }
 
     &__links {
