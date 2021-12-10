@@ -5,7 +5,7 @@
         </div>
         <div class="mo-nav__buttons">
             <div class="mo-btn mo-btn--margoff">{{ $t('landing.adminConsole') }}</div>
-            <div class="mo-btn mo-btn--backcolored">{{ $t('landing.getStarted') }}</div>
+            <g-link :to="$tp('/get-started/?s=nav_cta')" class="mo-btn mo-btn--backcolored">{{ $t('landing.getStarted') }}</g-link>
         </div>
     </nav>
 </template>

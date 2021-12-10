@@ -45,5 +45,13 @@
                 "content": "Utile pour les emails, ce système peut aussi être intégré dans des documents statiques (ex. PDF)."
             }
         }
+    },
+    "setup": {
+        "steps": {
+            "account": {
+                "title": "Créez un compte",
+                "content": "Vous avez besoin d'un compte pour créer des campagnes et visualiser les résultats."
+            }
+        }
     }
 }
