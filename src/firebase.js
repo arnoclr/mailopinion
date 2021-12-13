@@ -13,7 +13,7 @@ const firebaseConfig = {
   storageBucket: "mailopinion.appspot.com",
   messagingSenderId: "424964489752",
   appId: "1:424964489752:web:bbafcbb1352cd4cbc7b96d",
-  measurementId: "${config.measurementId}"
+  measurementId: "G-94XKDB1BZ7"
 };
 
 // Initialize Firebase
