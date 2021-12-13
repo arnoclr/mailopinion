@@ -11,7 +11,7 @@
           <span>{{ $t('landing.why.question') }}</span>
           <h1>{{ $t('landing.why.title') }}</h1>
           <p>{{ $t('landing.why.content') }}</p>
-          <g-link :to="$tp('/get-started/?s=hero_cta')" class="mo-btn mo-btn--colored">{{ $t('landing.getStarted') }}</g-link>
+          <g-link :to="$tp('/get-started/?s=' + $btoa('hero_cta'))" class="mo-btn mo-btn--colored">{{ $t('landing.getStarted') }}</g-link>
         </div>
       </div>
 
@@ -74,7 +74,7 @@
       </div>
 
       <div class="mo-ctabox">
-        <g-link :to="$tp('/get-started/?s=bottom_cta')" class="mo-btn mo-btn--backcolored">{{ $t('landing.getStarted') }}</g-link>
+        <g-link :to="$tp('/get-started/?s=' + $btoa('bottom_cta'))" class="mo-btn mo-btn--backcolored">{{ $t('landing.getStarted') }}</g-link>
       </div>
     </main>
 

@@ -2,6 +2,7 @@
 // The Client API can be used here. Learn more: gridsome.org/docs/client-api
 
 import '~/assets/styles/styles.scss'
+import btoa from 'btoa'
 
 export default function (Vue, { router, head, isClient, appOptions }) {
   head.link.push({
@@ -16,6 +17,8 @@ export default function (Vue, { router, head, isClient, appOptions }) {
     rel: 'preconnect',
     href: 'https://fonts.googleapis.com'
   }),
+
+  Vue.prototype.$btoa = btoa
 
   // translations
   appOptions.i18n.setLocaleMessage('fr-fr', require('./locales/fr-fr.json'))

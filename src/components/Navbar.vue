@@ -4,12 +4,12 @@
             Show website with your browser language ({{ browserLocale }}).
         </div>
         <nav class="mo-nav">
-            <g-link :to="$tp('/?s=nav_logo')" class="mo-nav__brand">
+            <g-link :to="$tp('/?s=' + $btoa('nav_logo'))" class="mo-nav__brand">
                 <img src="/img/logo.full.svg" alt="Mailopinion logo">
             </g-link>
             <div class="mo-nav__buttons">
                 <div class="mo-btn mo-btn--margoff">{{ $t('landing.adminConsole') }}</div>
-                <g-link :to="$tp('/get-started/?s=nav_cta')" class="mo-btn mo-btn--backcolored">{{ $t('landing.getStarted') }}</g-link>
+                <g-link :to="$tp('/get-started/?s=' + $btoa('nav_cta'))" class="mo-btn mo-btn--backcolored">{{ $t('landing.getStarted') }}</g-link>
             </div>
         </nav>
     </div>
@@ -20,7 +20,7 @@ export default {
     data: function () {
         return {
             currentLocale: this.$i18n.locale.toString().toLowerCase(),
-            browserLocale: navigator.language.toString().toLowerCase(),
+            browserLocale:  null,
             availableLocales: this.$i18n.availableLocales
         }
     },
@@ -35,6 +35,11 @@ export default {
             this.$router.push({
                 path: this.$tp(this.$route.path, this.browserLocale, true)
             })
+        }
+    },
+    mounted() {
+        if (process.isClient) {
+            this.browserLocale = navigator.language.toString().toLowerCase();
         }
     }
 }
