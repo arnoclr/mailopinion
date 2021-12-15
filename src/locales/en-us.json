@@ -1,3 +1,60 @@
 {
-    
+    "landing": {
+        "getStarted": "Get Started",
+        "adminConsole": "Admin console",
+        "why": {
+            "question": "Why mailopinion ?",
+            "title": "Mailopinion is a free service which allows you to measure the quality of your emails.",
+            "content": "Simple to set up, and easily usable by the user, it will allow you to collect feedbacks on your emails through smileys or thumbs, without the user wasting time."
+        },
+        "benefits": {
+            "title": "Avantages of Mailopinion",
+            "free": {
+                "title": "Free",
+                "content": "Built with Firebase, all functionalities are free to use."
+            },
+            "transparent": {
+                "title": "Transparent",
+                "content": "It fits perfectly into any email, and requires only one click from users."
+            },
+            "fast": {
+                "title": "Fast",
+                "content": "The system is very quick to set up and integrate into your emails, regardless of the number of emails."
+            }
+        },
+        "features": {
+            "title": "Fonctionnalités",
+            "campaigns": {
+                "title": "Campaigns",
+                "content": "Create multiples campaigns on the same account."
+            },
+            "comments": {
+                "title": "Comments",
+                "content": "Users can leave feedback after they have voted."
+            },
+            "analytics": {
+                "title": "Analytics",
+                "content": "Easily view the analytics of your campaigns with charts and averages."
+            },
+            "flexible": {
+                "title": "Flexible",
+                "content": "Multiples widgets are available, with smileys or thumbs."
+            },
+            "versatile": {
+                "title": "Versatile",
+                "content": "Usefull for emails, it's also can be used in static files (eg. PDF)."
+            }
+        }
+    },
+    "setup": {
+        "steps": {
+            "account": {
+                "title": "Create an account",
+                "content": "You need an account to create campaigns and collect feedback."
+            }
+        }
+    },
+    "intent": {
+        "thanks": "Thanks for voting !"
+    }
 }

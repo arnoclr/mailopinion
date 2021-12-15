@@ -53,5 +53,8 @@
                 "content": "Vous avez besoin d'un compte pour créer des campagnes et visualiser les résultats."
             }
         }
+    },
+    "intent": {
+        "thanks": "Merci pour votre avis !"
     }
 }

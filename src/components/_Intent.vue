@@ -1,14 +1,21 @@
 <template>
-    <div>
-        <div v-if="isSignedIn">
-            Signed in
-
-            {{ $user.uid }}
-
+    <div class="mo-vote">
+        <div class="mo-vote__box" v-if="isSignedIn">
             <!-- thumbs up/down -->
-            <div class="mo-vote-rack" v-if="maxScore == 2">
+            <div class="mo-voterack" v-if="maxScore == 2">
                 <button class="mo-btn mo-btn--icon" @click="vote(0)" :disabled="isVoting"><i class="material-icons">thumb_down</i></button>
                 <button class="mo-btn mo-btn--icon" @click="vote(1)" :disabled="isVoting"><i class="material-icons">thumb_up</i></button>
+            </div>
+
+            <!-- smileys -->
+            <div class="mo-vote-rack" v-if="maxScore == 3">
+                <button class="mo-btn mo-btn--icon" @click="vote(0)" :disabled="isVoting"><i class="material-icons">sentiment_dissatisfied</i></button>
+                <button class="mo-btn mo-btn--icon" @click="vote(1)" :disabled="isVoting"><i class="material-icons">sentiment_neutral</i></button>
+                <button class="mo-btn mo-btn--icon" @click="vote(2)" :disabled="isVoting"><i class="material-icons">sentiment_satisfied</i></button>
+            </div>
+
+            <div class="mo-confirmation" v-if="hasVoted">
+                <p>{{ $t('intent.thanks') }}</p>
             </div>
         </div>
     </div>
@@ -24,17 +31,21 @@ export default {
         return {
             userId: null,
             campaignId: null,
+            score: null,
             maxScore: null,
             isSignedIn: false,
             isVoting: false,
+            hasVoted: false,
         }
     },
     methods: {
         async vote(score) {
+            this.isVoting = true;
             await setDoc(doc(db, "users", this.userId, "campaigns", this.campaignId, "records", this.$user.uid), {
                 score,
                 createdAt: serverTimestamp()
             });
+            this.hasVoted = true;
         }
     },
     mounted() {
@@ -42,6 +53,7 @@ export default {
         this.userId = urlParams.get('userId') || urlParams.get('uid');
         this.campaignId = urlParams.get('campaignName') || urlParams.get('cid');
         this.maxScore = urlParams.get('maxScore') || 3;
+        this.score = urlParams.get('score') || null;
 
         if (!this.$user?.uid) {
             // no user logged in, we sign in anonymously
@@ -62,6 +74,13 @@ export default {
             // https://firebase.google.com/docs/reference/js/firebase.User
             this.$user = user;
             this.isSignedIn = true;
+            console.log(this.$user.uid)
+
+            // get user's score
+            if (this.score) {
+                this.vote(this.score);
+            }
+
         } else {
             // User is signed out
             // ...

@@ -1,7 +1,22 @@
+.mo-vote {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+
+    &__box {
+        height: 250px;
+    }
+}
+
 .mo-vote-rack {
     padding: 22px;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 12px;
+}
+
+.mo-confirmation {
+    padding: 22px;
+    text-align: center;
 }
