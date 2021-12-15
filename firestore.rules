@@ -14,7 +14,9 @@ service cloud.firestore {
     // allow authenticated user to add record in any campaign
     match /users/{uid}/campaigns/{cid}/records/{rid} {
       allow read, write: 
-        if request.auth.uid == rid;
+        if request.auth.uid == rid
+        && request.resource.score >= 0
+        && request.resource.score <= 3;
     }
   }
 }
