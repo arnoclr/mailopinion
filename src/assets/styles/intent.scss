@@ -19,4 +19,12 @@
 .mo-confirmation {
     padding: 22px;
     text-align: center;
+
+    &--error &__details {
+        color: #B00020;
+    }
+
+    &__details {
+        font-family: Arial, sans-serif;
+    }
 }

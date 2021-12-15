@@ -2,7 +2,7 @@
     <div class="mo-vote">
         <div class="mo-vote__box" v-if="isSignedIn">
             <!-- thumbs up/down -->
-            <div class="mo-voterack" v-if="maxScore == 2">
+            <div class="mo-vote-rack" v-if="maxScore == 2">
                 <button class="mo-btn mo-btn--icon" @click="vote(0)" :disabled="isVoting"><i class="material-icons">thumb_down</i></button>
                 <button class="mo-btn mo-btn--icon" @click="vote(1)" :disabled="isVoting"><i class="material-icons">thumb_up</i></button>
             </div>
@@ -20,7 +20,7 @@
 
             <div class="mo-confirmation mo-confirmation--error" v-if="error">
                 <p>{{ $t('intent.error') }}</p>
-                <small>{{ error }}</small>
+                <small class="mo-confirmation__details">{{ error }}</small>
             </div>
         </div>
     </div>
@@ -64,7 +64,7 @@ export default {
         this.userId = urlParams.get('userId') || urlParams.get('uid');
         this.campaignId = urlParams.get('campaignName') || urlParams.get('cid');
         this.maxScore = urlParams.get('maxScore') || 3;
-        this.score = urlParams.get('score') || null;
+        this.score = parseInt(urlParams.get('score')) || null;
 
         if (this.userId == null || this.campaignId == null) {
             this.error = "Invalid URL";
