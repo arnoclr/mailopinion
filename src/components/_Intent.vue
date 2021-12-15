@@ -68,7 +68,7 @@ export default {
 
         if (this.userId == null || this.campaignId == null) {
             this.error = "Invalid URL";
-            return;
+            this.isVoting = true;
         }
 
         if (!this.$user?.uid) {
