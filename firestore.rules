@@ -15,8 +15,8 @@ service cloud.firestore {
     match /users/{uid}/campaigns/{cid}/records/{rid} {
       allow read, write: 
         if request.auth.uid == rid
-        && request.resource.score >= 0
-        && request.resource.score <= 3;
+        && request.resource.data.score >= 0
+        && request.resource.data.score <= 2;
     }
   }
 }
