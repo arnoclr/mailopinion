@@ -8,7 +8,7 @@
             "content": "Simple to set up, and easily usable by the user, it will allow you to collect feedbacks on your emails through smileys or thumbs, without the user wasting time."
         },
         "benefits": {
-            "title": "Avantages of Mailopinion",
+            "title": "Advantages of Mailopinion",
             "free": {
                 "title": "Free",
                 "content": "Built with Firebase, all functionalities are free to use."
@@ -23,7 +23,7 @@
             }
         },
         "features": {
-            "title": "Fonctionnalités",
+            "title": "Features",
             "campaigns": {
                 "title": "Campaigns",
                 "content": "Create multiples campaigns on the same account."
