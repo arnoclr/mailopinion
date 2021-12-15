@@ -55,6 +55,7 @@
         }
     },
     "intent": {
-        "thanks": "Thanks for voting !"
+        "thanks": "Thanks for voting !",
+        "error": "An error occured, please try again later."
     }
 }

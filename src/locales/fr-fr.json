@@ -55,6 +55,7 @@
         }
     },
     "intent": {
-        "thanks": "Merci pour votre avis !"
+        "thanks": "Merci pour votre avis !",
+        "error": "Une erreur est survenue, veuillez réessayer plus tard."
     }
 }

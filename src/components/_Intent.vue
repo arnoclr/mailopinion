@@ -17,6 +17,11 @@
             <div class="mo-confirmation" v-if="hasVoted">
                 <p>{{ $t('intent.thanks') }}</p>
             </div>
+
+            <div class="mo-confirmation mo-confirmation--error" v-if="error">
+                <p>{{ $t('intent.error') }}</p>
+                <small>{{ error }}</small>
+            </div>
         </div>
     </div>
 </template>
@@ -36,16 +41,22 @@ export default {
             isSignedIn: false,
             isVoting: false,
             hasVoted: false,
+            error: null
         }
     },
     methods: {
         async vote(score) {
             this.isVoting = true;
-            await setDoc(doc(db, "users", this.userId, "campaigns", this.campaignId, "records", this.$user.uid), {
-                score,
-                createdAt: serverTimestamp()
-            });
-            this.hasVoted = true;
+            try {
+                await setDoc(doc(db, "users", this.userId, "campaigns", this.campaignId, "records", this.$user.uid), {
+                    score,
+                    createdAt: serverTimestamp()
+                });
+                this.hasVoted = true;
+            } catch (error) {
+                this.error = error;
+                this.isVoting = false;
+            }
         }
     },
     mounted() {
@@ -54,6 +65,11 @@ export default {
         this.campaignId = urlParams.get('campaignName') || urlParams.get('cid');
         this.maxScore = urlParams.get('maxScore') || 3;
         this.score = urlParams.get('score') || null;
+
+        if (this.userId == null && this.campaignId == null) {
+            this.error = "Invalid URL";
+            return;
+        }
 
         if (!this.$user?.uid) {
             // no user logged in, we sign in anonymously
