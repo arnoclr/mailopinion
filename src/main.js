@@ -19,6 +19,7 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   }),
 
   Vue.prototype.$btoa = btoa
+  Vue.prototype.$user = null
 
   // translations
   appOptions.i18n.setLocaleMessage('fr-fr', require('./locales/fr-fr.json'))

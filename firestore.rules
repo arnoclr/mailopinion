@@ -4,5 +4,17 @@ service cloud.firestore {
     match /{document=**} {
       allow read, write: if false;
     }
+
+    // allow user to see their campaigns stats
+    match /users/{uid}/{document=**} {
+      allow read: 
+        if request.auth.uid == uid;
+    }
+
+    // allow authenticated user to add record in any campaign
+    match /users/{uid}/campaigns/{cid}/records/{rid} {
+      allow read, write: 
+        if request.auth.uid == rid;
+    }
   }
 }
