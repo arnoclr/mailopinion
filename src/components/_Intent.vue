@@ -66,7 +66,7 @@ export default {
         this.maxScore = urlParams.get('maxScore') || 3;
         this.score = urlParams.get('score') || null;
 
-        if (this.userId == null && this.campaignId == null) {
+        if (this.userId == null || this.campaignId == null) {
             this.error = "Invalid URL";
             return;
         }
