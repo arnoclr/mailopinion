@@ -138,7 +138,17 @@
         }
 
         @media screen and (max-width: 768px) {
-            grid-template-columns: 1fr;
+            display: flex;
+            overflow-x: scroll;
+            scroll-snap-type: x mandatory;
+
+            &-card {
+                scroll-snap-align: start;
+
+                p {
+                    width: 250px;
+                }
+            }
         }
     }
 
