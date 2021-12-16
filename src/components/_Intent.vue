@@ -46,6 +46,7 @@ export default {
     },
     methods: {
         async vote(score) {
+            if (this.error) return;
             this.isVoting = true;
             try {
                 await setDoc(doc(db, "users", this.userId, "campaigns", this.campaignId, "records", this.$user.uid), {
