@@ -4,7 +4,7 @@
 
     <main class="mo-container">
       <ClientOnly>
-        <GetStarted />
+        <Install />
       </ClientOnly>
     </main>
 
@@ -20,7 +20,7 @@ export default {
   components: {
     Navbar,
     Footer,
-    GetStarted: () => import ('~/components/_Get-Started.vue')
+    Install: () => import ('~/components/_Install.vue')
   },
   metaInfo: {
     title: 'Get started'

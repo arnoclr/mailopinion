@@ -20,6 +20,7 @@ export default function (Vue, { router, head, isClient, appOptions }) {
 
   Vue.prototype.$btoa = btoa
   Vue.prototype.$user = null
+  Vue.prototype.$isSignedIn = false
 
   // translations
   appOptions.i18n.setLocaleMessage('fr-fr', require('./locales/fr-fr.json'))

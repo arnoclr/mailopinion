@@ -71,18 +71,21 @@ export default {
             this.isVoting = true;
         }
 
-        if (!this.$user?.uid) {
-            // no user logged in, we sign in anonymously
-            signInAnonymously(auth)
-            .then(() => {
-                // Signed in..
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.error(errorCode, errorMessage);
-            });
-        }
+        // wait to check if user is already signed in
+        setTimeout(() => {
+            if (!this.$user?.uid) {
+                // no user logged in, we sign in anonymously
+                signInAnonymously(auth)
+                .then(() => {
+                    // Signed in..
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.error(errorCode, errorMessage);
+                });
+            }
+        }, 1000);
 
         onAuthStateChanged(auth, (user) => {
         if (user) {
