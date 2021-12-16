@@ -9,7 +9,7 @@
             </g-link>
             <div class="mo-nav__buttons">
                 <div class="mo-btn mo-btn--margoff">{{ $t('landing.adminConsole') }}</div>
-                <g-link :to="$tp('/get-started/?s=' + $btoa('nav_cta'))" class="mo-btn mo-btn--backcolored">{{ $t('landing.getStarted') }}</g-link>
+                <g-link :to="$tp('/install/?s=' + $btoa('nav_cta'))" class="mo-btn mo-btn--backcolored">{{ $t('landing.getStarted') }}</g-link>
             </div>
         </nav>
     </div>
