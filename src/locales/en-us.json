@@ -62,8 +62,9 @@
                 "title": "Choose the type of feedback",
                 "content": "You can change this later.",
                 "options": {
-                    "smiley": "Smiley",
-                    "thumbs": "Thumbs"
+                    "smileys": "Smileys",
+                    "thumbs": "Thumbs",
+                    "question": "Question"
                 }
             },
             "4": {
@@ -77,5 +78,10 @@
     "intent": {
         "thanks": "Thanks for voting !",
         "error": "An error occured, please try again later."
+    },
+    "embed": {
+        "title": "Was this email helpful ?",
+        "yes": "Yes",
+        "no": "No"
     }
 }

@@ -56,14 +56,37 @@
                 </div>
                 <div class="mo-stepper__step-content">
                     <p>{{ $t('setup.steps.3.content') }}</p>
-                    <p>
-                        <button 
+                    <div>
+                        <div class="mo-fbselect">
+                            <div class="mo-fbselect__item" role="button" tabindex="1"
+                            @click="selectEmbed('thumbs')" :active="embedType == 'thumbs'">
+                                <i class="material-icons">thumb_up</i>
+                                <span class="mo-fbselect__item-label">{{ $t('setup.steps.3.options.thumbs') }}</span>
+                            </div>
+                            <div class="mo-fbselect__item" role="button" tabindex="1"
+                            @click="selectEmbed('smileys')"  :active="embedType == 'smileys'">
+                                <i class="material-icons">sentiment_satisfied</i>
+                                <span class="mo-fbselect__item-label">{{ $t('setup.steps.3.options.smileys') }}</span>
+                            </div>
+                            <div class="mo-fbselect__item" role="button" tabindex="1"
+                            @click="selectEmbed('question')"  :active="embedType == 'question'">
+                                <i class="material-icons">question_answer</i>
+                                <span class="mo-fbselect__item-label">{{ $t('setup.steps.3.options.question') }}</span>
+                            </div>
+                        </div>
+                        <div class="mo-textfield" v-if="embedType == 'question'">
+                            <input class="mo-textfield__input" type="text" id="embedQuestion"
+                            placeholder=" " v-model="embedQuestion">
+                            <label class="mo-textfield__label" for="embedQuestion">Question</label>
+                            <div class="mo-textfield__underline"></div>
+                        </div>
+                        <!-- <button 
                             class="mo-btn mo-btn--small mo-btn--atleft" 
                             @click="step--" :disabled="step != 3">Back</button>
                         <button 
                             class="mo-btn mo-btn--small mo-btn--backcolored" 
-                            @click="step++" :disabled="step > 3">Next</button>
-                    </p>
+                            @click="step++" :disabled="step > 3">Next</button> -->
+                    </div>
                 </div>
             </div>
             <div class="mo-stepper__step" :checked="step > 4" :disabled="step < 4">
@@ -73,9 +96,14 @@
                 </div>
                 <div class="mo-stepper__step-content">
                     <p>{{ $t('setup.steps.4.content') }}</p>
-                    <p v-if="isSignedIn">
-                        <textarea ref="embeded" class="mo-textarea mo-textarea--copy" v-model="script3" id="" cols="30" rows="10" @click="copyToClipboard"></textarea>
-                    </p>
+                    <div v-if="isSignedIn">
+                        <div class="mo-preview">
+                            <textarea ref="embeded" class="mo-textarea mo-textarea--copy" v-model="embedHTML" cols="30" rows="10" @click="copyToClipboard" title="click to copy on clipboard"></textarea>
+                            <div class="mo-preview__render">
+                                <div class="mo-preview__render-html" v-html="embedHTML"></div>
+                            </div>
+                        </div>
+                    </div>
                     <p>
                         <g-link 
                             class="mo-btn mo-btn--small mo-btn--backcolored mo-btn--atleft" 
@@ -101,25 +129,110 @@ export default {
             step: 1,
             isSignedIn: false,
             campaignName: '',
-            campaignNameAvailable: true
+            campaignNameAvailable: true,
+            embedType: null,
+            embedQuestion: ''
         }
     },
     computed: {
-        script3() {
-            return `<table width="100%" border="0" cellspacing="0" cellpadding="0">
-                <tr>
-                    <td align="center">
-                        <div style="color:#5f6368;font-family:'Roboto', Arial, sans-serif;letter-spacing:0.2px;line-height:20px;margin-top:4px;padding:12px 0 14px">Cet e-mail vous a-t-il été utile&nbsp;?</div>
-                        <div style="margin: 0 auto; width: 100%;">
-                        <a href="${this.generateUrlForScore(0, 2)}" target="_blank" data-saferedirecturl="${this.generateUrlForScore(0, 2)}"><img src="https://i.imgur.com/BKnzqfd.png" style="height:24px;margin:0 auto;padding:0 6px 34px;width:24px"></a>
+        embedHTML() {
+            switch (this.embedType) {
+            case 'thumbs':
+                return `<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td align="center">
+                            <div style="color:#5f6368;font-family:'Roboto', Arial, sans-serif;letter-spacing:0.2px;line-height:20px;margin-top:4px;padding:12px 0 14px">${ this.$t('embed.title') }</div>
+                            <div style="margin: 0 auto; width: 100%;">
+                            <a href="${this.generateUrlForScore(0, 2)}" target="_blank" data-saferedirecturl="${this.generateUrlForScore(0, 2)}"><img src="https://i.imgur.com/CMvTYvd.png" style="height:24px;margin:0 auto;padding:0 10px 34px;width:24px"></a>
 
-                        <a href="${this.generateUrlForScore(1, 2)}" target="_blank" data-saferedirecturl="${this.generateUrlForScore(1, 2)}"><img src="https://i.imgur.com/QH1dou3.png" style="height:24px;margin:0 auto;padding:0 6px 34px;width:24px"></a>
+                            <a href="${this.generateUrlForScore(1, 2)}" target="_blank" data-saferedirecturl="${this.generateUrlForScore(1, 2)}"><img src="https://i.imgur.com/CCm96p8.png" style="height:24px;margin:0 auto;padding:0 10px 34px;width:24px"></a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>`.replace(/>\s+</g, '><');
+            case 'smileys':
+                return `<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td align="center">
+                            <div style="color:#5f6368;font-family:'Roboto', Arial, sans-serif;letter-spacing:0.2px;line-height:20px;margin-top:4px;padding:12px 0 14px">${ this.$t('embed.title') }</div>
+                            <div style="margin: 0 auto; width: 100%;">
+                            <a href="${this.generateUrlForScore(0, 2)}" target="_blank" data-saferedirecturl="${this.generateUrlForScore(0, 2)}"><img src="https://i.imgur.com/BKnzqfd.png" style="height:24px;margin:0 auto;padding:0 6px 34px;width:24px"></a>
 
-                        <a href="${this.generateUrlForScore(2, 2)}" target="_blank" data-saferedirecturl="${this.generateUrlForScore(2, 2)}"><img src="https://i.imgur.com/3Y1vOtr.png" style="height:24px;margin:0 auto;padding:0 6px 34px;width:24px"></a>
-                        </div>
-                    </td>
+                            <a href="${this.generateUrlForScore(1, 2)}" target="_blank" data-saferedirecturl="${this.generateUrlForScore(1, 2)}"><img src="https://i.imgur.com/QH1dou3.png" style="height:24px;margin:0 auto;padding:0 6px 34px;width:24px"></a>
+
+                            <a href="${this.generateUrlForScore(2, 2)}" target="_blank" data-saferedirecturl="${this.generateUrlForScore(2, 2)}"><img src="https://i.imgur.com/3Y1vOtr.png" style="height:24px;margin:0 auto;padding:0 6px 34px;width:24px"></a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>`.replace(/>\s+</g, '><');
+            case 'question':
+                return `<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="88%" align="center" style="margin:0 auto;text-align:center">
+                <tbody><tr>
+                <td align="left" valign="top" style="border:1px solid #a3a6a3;border-radius:3px">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tbody><tr>
+                <td align="left" valign="top" style="padding:15px 17px">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tbody><tr>
+                <td align="left" valign="top" width="310" style="display:inline-block">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                <tbody><tr>
+                <td align="left" valign="middle" width="35">
+                <img src="https://i.imgur.com/qPd1TP2.png" width="35">
+                </td>
+                <td align="left" valign="middle" style="padding-left:7px">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                <tbody><tr>
+                <td width="233" height="45" align="left" valign="middle" background="https://i.imgur.com/buyM6GU.png" style="background-image:url(https://i.imgur.com/buyM6GU.png);background-repeat:no-repeat;background-size:100% 100%">
+
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="left" width="215">
+                <tbody><tr>
+                <td align="center" valign="middle" style="font-family:Google Sans,Roboto,Arial,Open Sans,Helvetica,sans-serif;font-size:15px;line-height:23px;color:#444444;font-weight:500;padding-left:20px">
+                ${ this.embedQuestion }</td>
                 </tr>
-            </table>`.replace(/>\s+</g, '><');
+                </tbody></table>
+
+                </td>
+                </tr>
+                </tbody></table>
+                </td>
+                </tr>
+                </tbody></table>
+                </td>
+                <td align="right" valign="top" width="300" style="display:inline-block">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                <tbody><tr>
+                <td align="center" valign="top">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                <tbody><tr>
+                <td align="center" valign="top" width="90" style="background-color:#f1f3f4;font-family:Google Sans,Roboto,Arial,Open Sans,Helvetica,sans-serif;font-size:14px;border-radius:3px;line-height:21px;color:#202124;font-weight:500;letter-spacing:0.5px">
+                <a style="color:#202124;text-decoration:none;display:block;border-top:12px solid #f1f3f4;border-bottom:12px solid #f1f3f4;border-radius:3px" href="${this.generateUrlForScore(1, 1)}" target="_blank">${ this.$t('embed.yes') }</a>
+                </td>
+                </tr>
+                </tbody></table>
+                </td>
+                <td align="center" valign="top" width="20"></td>
+                <td align="center" valign="top">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="90">
+                <tbody><tr>
+                <td align="center" valign="top" style="background-color:#f1f3f4;font-family:Google Sans,Roboto,Arial,Open Sans,Helvetica,sans-serif;font-size:14px;border-radius:3px;line-height:21px;color:#202124;font-weight:500;letter-spacing:0.5px">
+                <a style="color:#202124;text-decoration:none;display:block;border-top:12px solid #f1f3f4;border-bottom:12px solid #f1f3f4;border-radius:3px" href="${this.generateUrlForScore(0, 1)}" target="_blank">${ this.$t('embed.no') }</a>
+                </td>
+                </tr>
+                </tbody></table>
+                </td>
+                </tr>
+                </tbody></table>
+                </td>
+                </tr>
+                </tbody></table>
+                </td>
+                </tr>
+                </tbody></table>
+                </td>
+                </tr>
+                </tbody></table>`.replace(/>\s+</g, '><');
+            }
         }
     },
     methods: {
@@ -154,6 +267,10 @@ export default {
             this.$refs.embeded.select();
             document.execCommand('copy');
             alert('Copied to clipboard');
+        },
+        selectEmbed(type) {
+            this.embedType = type;
+            this.step = 4;
         }
     },
     mounted() {

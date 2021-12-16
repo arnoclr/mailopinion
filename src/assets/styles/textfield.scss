@@ -1,5 +1,5 @@
 $defaultTranform: translate3D(0, 0, 0) scale(1);
-$activeTransform: translate3D(-22px, -18px, 0) scale(0.7);
+$activeTransform: translate3D(-4px, -14px, 0) scale(0.7);
 
 .mo-textfield {
     padding-top: 16px;
@@ -9,7 +9,7 @@ $activeTransform: translate3D(-22px, -18px, 0) scale(0.7);
         border: none;
         outline: none;
         width: 100%;
-        padding: 6px 8px;
+        padding: 6px 4px;
         font-family: Arial, sans-serif;
         font-size: 16px;
     }
@@ -20,6 +20,7 @@ $activeTransform: translate3D(-22px, -18px, 0) scale(0.7);
         left: 8px;
         color: #999;
         transform: $activeTransform;
+        transform-origin: top left;
         transition: transform .2s cubic-bezier(.2,.1,.07,.94), color .2s ease;
         font-family: Arial, sans-serif;
         cursor: text;
@@ -33,8 +34,8 @@ $activeTransform: translate3D(-22px, -18px, 0) scale(0.7);
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 2px;
-            background-color: #dadada;
+            height: 1px;
+            background-color: #898989;
         }
 
         &::after {
@@ -88,7 +89,9 @@ $activeTransform: translate3D(-22px, -18px, 0) scale(0.7);
 }
 
 .mo-textarea {
+    box-sizing: border-box;
     width: 100%;
+    padding: 12px;
     border: 1px solid #dadada;
     border-radius: 4px;
     font-family: Arial, sans-serif;
@@ -100,5 +103,6 @@ $activeTransform: translate3D(-22px, -18px, 0) scale(0.7);
     &--copy {
         color: #555;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        cursor: copy;
     }
 }

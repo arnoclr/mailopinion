@@ -1,0 +1,53 @@
+.mo-preview {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 22px;
+
+    &__render {
+        background-color: #eee;
+        border-radius: 4px;
+        display: grid;
+        place-items: center;
+        pointer-events: none;
+    }
+
+    @media screen and (min-width: 1100px) {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.mo-fbselect {
+    margin-bottom: 22px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: 12px;
+
+    &__item {
+        width: 72px;
+        height: 72px;
+        padding: 32px;
+        display: grid;
+        place-items: center;
+        background-color: #ededed;
+        border-radius: 4px;
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.20);
+        cursor: pointer;
+        transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+        &-label {
+            @include ff;
+            font-weight: 500;
+            color: #545454;
+        }
+
+        &[active] {
+            background-color: $color-primary;
+            color: #fff;
+        }
+
+        &[active] &-label {
+            color: #fff;
+        }
+    }
+}
