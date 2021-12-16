@@ -139,6 +139,7 @@
 
         @media screen and (max-width: 768px) {
             display: flex;
+            gap: 12px;
             overflow-x: scroll;
             scroll-snap-type: x mandatory;
 
@@ -146,7 +147,7 @@
                 scroll-snap-align: start;
 
                 p {
-                    width: 250px;
+                    width: 210px;
                 }
             }
         }
