@@ -1,0 +1,65 @@
+$defaultTranform: translate3D(0, 0, 0) scale(1);
+$activeTransform: translate3D(-22px, -18px, 0) scale(0.7);
+
+.mo-textfield {
+    padding-top: 16px;
+    position: relative;
+
+    &__input {
+        border: none;
+        outline: none;
+        width: 100%;
+        padding: 6px 8px;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+    }
+
+    &__label {
+        position: absolute;
+        bottom: 8px;
+        left: 8px;
+        color: #999;
+        transform: $activeTransform;
+        transition: transform .2s cubic-bezier(.2,.1,.07,.94), color .2s ease;
+        font-family: Arial, sans-serif;
+        cursor: text;
+        user-select: none;
+    }
+
+    &__underline {
+        &::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #dadada;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: $color-primary;
+            transform: scaleX(0);
+            transition: transform 0.2s cubic-bezier(0,.85,.42,.97);
+        }
+    }
+
+    &__input:placeholder-shown+&__label {
+        transform: $defaultTranform;
+    }
+
+    &__input:focus+&__label {
+        transform: $activeTransform;
+        color: $color-primary;
+    }
+
+    &__input:focus~&__underline::after {
+        transform: scaleX(1);
+    }
+}

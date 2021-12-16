@@ -31,12 +31,17 @@
                 </div>
                 <div class="mo-stepper__step-content">
                     <p>{{ $t('setup.steps.2.content') }}</p>
+                    <div class="mo-textfield">
+                        <input class="mo-textfield__input" type="text" id="campaignName" placeholder=" ">
+                        <label class="mo-textfield__label" for="campaignName">Campaign name</label>
+                        <div class="mo-textfield__underline"></div>
+                    </div>
                     <p>
-                        <button 
+                        <!-- <button 
                             class="mo-btn mo-btn--small mo-btn--atleft" 
-                            @click="step--" :disabled="step != 2">Back</button>
+                            @click="step--" :disabled="step != 2">Back</button> -->
                         <button 
-                            class="mo-btn mo-btn--small mo-btn--backcolored" 
+                            class="mo-btn mo-btn--small mo-btn--backcolored mo-btn--atleft" 
                             @click="step++" :disabled="step > 2">Next</button>
                     </p>
                 </div>
