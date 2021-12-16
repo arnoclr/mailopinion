@@ -1,7 +1,7 @@
 .mo-stepper {
     margin: 0 auto;
+    padding: 16px;
     max-width: max(500px, 80vw);
-    width: 100%;
 
     &__header {
         margin: 48px 0;
@@ -54,6 +54,7 @@
 
         &[disabled] &-header {
             user-select: none;
+            padding-bottom: 16px;
 
             &-number {
                 background-color: #9E9E9E;
@@ -67,6 +68,7 @@
         &[disabled] &-content {
             height: 0;
             opacity: 0;
+            display: none;
         }
     }
 }

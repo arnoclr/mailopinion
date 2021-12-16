@@ -9,11 +9,19 @@
             </g-link>
             <div class="mo-nav__buttons">
                 <div class="mo-btn mo-btn--margoff">{{ $t('landing.adminConsole') }}</div>
-                <g-link :to="$tp('/install/?s=' + $btoa('nav_cta'))" class="mo-btn mo-btn--backcolored">{{ $t('landing.getStarted') }}</g-link>
+                <g-link :to="$tp('/install/?s=' + $btoa('nav_cta'))" class="mo-btn mo-btn--backcolored hidden">{{ $t('landing.getStarted') }}</g-link>
             </div>
         </nav>
     </div>
 </template>
+
+<style scoped>
+@media screen and (max-width: 768px) {
+    .hidden {
+        display: none;
+    }
+}
+</style>
 
 <script>
 export default {

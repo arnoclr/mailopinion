@@ -71,6 +71,7 @@
                 "content": "Copy the code below and paste it at the end of your email."
             }
         },
+        "nameNotAvailable": "This campaign name is already taken. Please choose another if you not want to merge results.",
         "dashboard": "View your dashboard"
     },
     "intent": {

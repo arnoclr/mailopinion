@@ -2,13 +2,13 @@
     <div class="mo-vote">
         <div class="mo-vote__box" v-if="isSignedIn">
             <!-- thumbs up/down -->
-            <div class="mo-vote-rack" v-if="maxScore == 2">
+            <div class="mo-vote-rack" v-if="maxScore == 1">
                 <button class="mo-btn mo-btn--icon" @click="vote(0)" :disabled="isVoting"><i class="material-icons">thumb_down</i></button>
                 <button class="mo-btn mo-btn--icon" @click="vote(1)" :disabled="isVoting"><i class="material-icons">thumb_up</i></button>
             </div>
 
             <!-- smileys -->
-            <div class="mo-vote-rack" v-if="maxScore == 3">
+            <div class="mo-vote-rack" v-if="maxScore == 2">
                 <button class="mo-btn mo-btn--icon" @click="vote(0)" :disabled="isVoting"><i class="material-icons">sentiment_dissatisfied</i></button>
                 <button class="mo-btn mo-btn--icon" @click="vote(1)" :disabled="isVoting"><i class="material-icons">sentiment_neutral</i></button>
                 <button class="mo-btn mo-btn--icon" @click="vote(2)" :disabled="isVoting"><i class="material-icons">sentiment_satisfied</i></button>
@@ -64,7 +64,7 @@ export default {
         const urlParams = new URLSearchParams(window.location.search);
         this.userId = urlParams.get('userId') || urlParams.get('uid');
         this.campaignId = urlParams.get('campaignName') || urlParams.get('cid');
-        this.maxScore = urlParams.get('maxScore') || 3;
+        this.maxScore = urlParams.get('maxScore') || 2;
         this.score = parseInt(urlParams.get('score')) || null;
 
         if (this.userId == null || this.campaignId == null) {
