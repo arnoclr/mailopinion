@@ -29,6 +29,16 @@
         padding-right: 8px;
     }
 
+    &--small {
+        margin: 0 4px;
+        padding: 8px 22px;
+        font-size: 14px;
+    }
+
+    &--atleft {
+        margin-left: 0;
+    }
+
     &--icon {
         width: 56px;
         height: 56px;

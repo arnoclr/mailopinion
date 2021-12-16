@@ -23,7 +23,7 @@
     }
 
     .g-sign-in-button {
-        margin: 10px;
+        margin: 10px 0;
         display: inline-block;
         width: 240px;
         height: 50px;
@@ -85,7 +85,7 @@
     }
 
     .g-sign-out {
-        margin: 0px 12px;
+        margin: 0px;
         display: block;
         font-family: Arial, sans-serif;
         cursor: pointer;
@@ -106,6 +106,7 @@ import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from
 import { auth } from "~/firebase.js";
 
 export default {
+    props: ['onSuccess'],
     data() {
         return {
             isSignedIn: false,
@@ -146,6 +147,7 @@ export default {
                 if(user.email) {
                     this.$user = user;
                     this.isSignedIn = true;
+                    this.onSuccess();
                 }
             } else {
                 this.$user = null;

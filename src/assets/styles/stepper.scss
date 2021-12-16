@@ -1,0 +1,72 @@
+.mo-stepper {
+    margin: 0 auto;
+    max-width: max(500px, 80vw);
+    width: 100%;
+
+    &__header {
+        margin: 48px 0;
+
+        &-title {
+            h1, p {
+                margin: 8px 0;
+            }
+        }
+    }
+
+    &__step {
+        &-header {
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+
+            &-number {
+                display: grid;
+                place-items: center;
+                height: 28px;
+                width: 28px;
+                border-radius: 50%;
+                background-color: $color-primary;
+                color: #fff;
+                font-family: Arial, sans-serif;
+                font-size: 12px;
+                user-select: none;
+            }
+
+            &-label {
+                margin: 0;
+                font-size: 16px;
+                line-height: 16px;
+                font-weight: 500;
+            }
+        }
+
+        &-content {
+            margin-left: 14px;
+            padding-left: 14+16px;
+            padding-top: 8px;
+            padding-bottom: 16px;
+            border-left: 1px solid #E0E0E0;
+            opacity: 1;
+            height: auto;
+            transition: opacity 350ms ease;
+        }
+
+        &[disabled] &-header {
+            user-select: none;
+
+            &-number {
+                background-color: #9E9E9E;
+            }
+
+            &-label {
+                color: #9E9E9E;
+            }
+        }
+
+        &[disabled] &-content {
+            height: 0;
+            opacity: 0;
+        }
+    }
+}

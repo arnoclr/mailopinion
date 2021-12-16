@@ -1,6 +1,6 @@
 {
     "landing": {
-        "getStarted": "Get Started",
+        "getStarted": "Get started",
         "adminConsole": "Admin console",
         "why": {
             "question": "Why mailopinion ?",
@@ -48,11 +48,30 @@
     },
     "setup": {
         "steps": {
-            "account": {
+            "title": "Installation",
+            "content": "Follow the installation steps below to create a campaign and see the results.",
+            "1": {
                 "title": "Create an account",
                 "content": "You need an account to create campaigns and collect feedback."
+            },
+            "2": {
+                "title": "Create a campaign",
+                "content": "Choose an unique name for your campaign."
+            },
+            "3": {
+                "title": "Choose the type of feedback",
+                "content": "You can change this later.",
+                "options": {
+                    "smiley": "Smiley",
+                    "thumbs": "Thumbs"
+                }
+            },
+            "4": {
+                "title": "Embed the widget",
+                "content": "Copy the code below and paste it at the end of your email."
             }
-        }
+        },
+        "dashboard": "View your dashboard"
     },
     "intent": {
         "thanks": "Thanks for voting !",
