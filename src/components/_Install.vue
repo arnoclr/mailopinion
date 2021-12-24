@@ -107,7 +107,7 @@
                     <p>
                         <g-link 
                             class="mo-btn mo-btn--small mo-btn--backcolored mo-btn--atleft" 
-                            :to="$tp('/dashboard')">{{ $t('setup.dashboard') }}</g-link>
+                            :to="$tp('/console/?cn=' + campaignName + '&s=' + $btoa('install_flow'))">{{ $t('setup.dashboard') }}</g-link>
                     </p>
                 </div>
             </div>

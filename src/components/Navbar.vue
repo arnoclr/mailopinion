@@ -8,7 +8,7 @@
                 <img src="/img/logo.full.svg" alt="Mailopinion logo">
             </g-link>
             <div class="mo-nav__buttons">
-                <div class="mo-btn mo-btn--margoff">{{ $t('landing.adminConsole') }}</div>
+                <g-link :to="$tp('/console/?s=' + $btoa('nav_cta'))" class="mo-btn mo-btn--margoff">{{ $t('landing.adminConsole') }}</g-link>
                 <g-link :to="$tp('/install/?s=' + $btoa('nav_cta'))" class="mo-btn mo-btn--backcolored hidden">{{ $t('landing.getStarted') }}</g-link>
             </div>
         </nav>
