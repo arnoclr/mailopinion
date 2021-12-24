@@ -50,6 +50,8 @@
         "steps": {
             "title": "Installation",
             "content": "Follow the installation steps below to create a campaign and see the results.",
+            "next": "Next",
+            "back": "Back",
             "1": {
                 "title": "Create an account",
                 "content": "You need an account to create campaigns and collect feedback."
@@ -83,5 +85,10 @@
         "title": "Was this email helpful ?",
         "yes": "Yes",
         "no": "No"
+    },
+    "auth": {
+        "loggedIn": "You're already logged in",
+        "signOut": "Sign out",
+        "signInWithGoogle": "Sign in with Google"
     }
 }

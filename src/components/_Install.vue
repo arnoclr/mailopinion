@@ -45,7 +45,7 @@
                             @click="step--" :disabled="step != 2">Back</button> -->
                         <button 
                             class="mo-btn mo-btn--small mo-btn--backcolored mo-btn--atleft" 
-                            @click="step++" :disabled="step > 2">Next</button>
+                            @click="step++" :disabled="step > 2">{{ $t('setup.steps.next') }}</button>
                     </p>
                 </div>
             </div>

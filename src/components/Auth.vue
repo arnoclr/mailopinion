@@ -6,14 +6,14 @@
                     <img src='https://developers.google.com/identity/images/g-logo.png'>
                 </div>
                 <span class="text-container" v-if="isSignedIn">
-                    <span>You're logged in</span>
+                    <span>{{ $t('auth.loggedIn') }}</span>
                 </span>
                 <span class="text-container" v-else>
-                    <span>Sign in with Google</span>
+                    <span>{{ $t('auth.signInWithGoogle') }}</span>
                 </span>
             </div>
         </div>
-        <small class="g-sign-out" :disabled="!isSignedIn" @click="signOut">Sign out</small>
+        <small class="g-sign-out" :disabled="!isSignedIn" @click="signOut">{{ $t('auth.signOut') }}</small>
     </div>
 </template>
 

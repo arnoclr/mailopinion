@@ -48,14 +48,47 @@
     },
     "setup": {
         "steps": {
-            "account": {
+            "title": "Installation",
+            "content": "Suivez les étapes ci-dessous pour mettre en place et suivre les résultats de vos campagnes.",
+            "next": "Suivant",
+            "back": "Précédent",
+            "1": {
                 "title": "Créez un compte",
-                "content": "Vous avez besoin d'un compte pour créer des campagnes et visualiser les résultats."
+                "content": "Il est nécéssaire pour visualiser vos résultats."
+            },
+            "2": {
+                "title": "Créez une campagne",
+                "content": "Choisissez un nom unique pour votre campagne."
+            },
+            "3": {
+                "title": "Choisissez le type de formulaire",
+                "content": "Vous pourrez le modifier par la suite.",
+                "options": {
+                    "smileys": "Visages",
+                    "thumbs": "Pouces",
+                    "question": "Question"
+                }
+            },
+            "4": {
+                "title": "Intégrez le widget",
+                "content": "Copiez le code et collez le dans votre email."
             }
-        }
+        },
+        "nameNotAvailable": "Ce nom a déjà été utilisé, choisissez en un autre si vous ne souhaitez pas combiner les résultats.",
+        "dashboard": "Voir vos campagnes"
     },
     "intent": {
         "thanks": "Merci pour votre avis !",
         "error": "Une erreur est survenue, veuillez réessayer plus tard."
+    },
+    "embed": {
+        "title": "Cet email vous a-t-il été utile ?",
+        "yes": "Oui",
+        "no": "Non"
+    },
+    "auth": {
+        "loggedIn": "Vous êtes déjà connecté",
+        "signOut": "Se déconnecter",
+        "signInWithGoogle": "Se connecter avec Google"
     }
 }
