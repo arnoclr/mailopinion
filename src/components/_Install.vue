@@ -31,21 +31,30 @@
                 </div>
                 <div class="mo-stepper__step-content">
                     <p>{{ $t('setup.steps.2.content') }}</p>
-                    <div class="mo-textfield" 
-                        :valid="campaignNameAvailable && campaignName.length > 4" :invalid="!campaignNameAvailable">
-                        <input class="mo-textfield__input" type="text" id="campaignName" placeholder=" "
-                            v-model="campaignName" @keyup="checkTimeOut">
-                        <label class="mo-textfield__label" for="campaignName">Campaign name</label>
+                    <div class="mo-textfield">
+                        <input class="mo-textfield__input" type="text" id="campaignLabel" placeholder=" "
+                            v-model="campaignLabel">
+                        <label class="mo-textfield__label" for="campaignLabel">Campaign label</label>
                         <div class="mo-textfield__underline"></div>
-                        <div class="mo-textfield__disclaimer" v-show="!campaignNameAvailable">{{ $t('setup.nameNotAvailable') }}</div>
                     </div>
+                    <div v-if="advancedOptions">
+                        <div class="mo-textfield" 
+                        :valid="campaignNameAvailable && campaignName.length > 4" :invalid="!campaignNameAvailable">
+                            <input class="mo-textfield__input" type="text" id="campaignName" placeholder=" "
+                                v-model="campaignName" @keyup="checkTimeOut">
+                            <label class="mo-textfield__label" for="campaignName">Campaign id</label>
+                            <div class="mo-textfield__underline"></div>
+                            <div class="mo-textfield__disclaimer" v-show="!campaignNameAvailable">{{ $t('setup.nameNotAvailable') }}</div>
+                        </div>
+                    </div>
+                    <span @click="advancedOptions = true" v-else>Show advanced options</span>
                     <p>
                         <!-- <button 
                             class="mo-btn mo-btn--small mo-btn--atleft" 
                             @click="step--" :disabled="step != 2">Back</button> -->
                         <button 
                             class="mo-btn mo-btn--small mo-btn--backcolored mo-btn--atleft" 
-                            @click="step++" :disabled="step > 2">{{ $t('setup.steps.next') }}</button>
+                            @click="registerCampaign" :disabled="step > 2">{{ $t('setup.steps.next') }}</button>
                     </p>
                 </div>
             </div>
@@ -117,8 +126,14 @@
 
 <script>
 import { logEvent } from 'firebase/analytics'
-import { getDocs, collection, query, orderBy, limit } from "firebase/firestore";
+import { getDocs, collection, doc, setDoc, addDoc, updateDoc, query, orderBy, limit, serverTimestamp } from "firebase/firestore";
 import { analytics, db } from '~/firebase'
+
+const scoresTable = {
+    "thumbs": 1,
+    "smileys": 2,
+    "question": 1
+}
 
 export default {
     components: {
@@ -129,9 +144,11 @@ export default {
             step: 1,
             isSignedIn: false,
             campaignName: '',
+            campaignLabel: '',
             campaignNameAvailable: true,
             embedType: null,
-            embedQuestion: ''
+            embedQuestion: '',
+            advancedOptions: false
         }
     },
     computed: {
@@ -251,6 +268,36 @@ export default {
             const querySnapshot = await getDocs(q);
             this.campaignNameAvailable = querySnapshot.empty;
         },
+        async registerCampaign() {
+            try {
+                const data = {
+                    label: this.campaignLabel,
+                    createdAt: serverTimestamp(),
+                    averageScore: 0,
+                    total: 0,
+                    isActive: true
+                }
+
+                const col = collection(db, "users", this.$user.uid, "campaigns")
+                
+                if (this.campaignName != '') {
+                    await setDoc(doc(col, this.campaignName), data);
+                } else {
+                    const docRef = await addDoc(col, data);
+                    this.campaignName = docRef.id;
+                }
+
+                this.step = 3;
+            } catch (e) {
+                console.error(e);
+            }
+        },
+        async updateCampaign() {
+            await updateDoc(doc(db, "users", this.$user.uid, "campaigns", this.campaignName), {
+                maxScore: scoresTable[this.embedType],
+                embedQuestion: this.embedQuestion
+            });
+        },
         checkTimeOut() {
             if (this.timer) {
                 clearTimeout(this.timer);
@@ -261,7 +308,7 @@ export default {
             }, 300);
         },
         generateUrlForScore(score, maxScore) {
-            return `https://mailopinion.web.app/intent/?score=${score}&campaignName=${encodeURIComponent(this.campaignName)}&uid=${this.$user.uid}&maxScore=${maxScore}`;
+            return `https://mailopinion.web.app/intent/?score=${score}&cpid=${encodeURIComponent(this.campaignName)}&uid=${this.$user.uid}&maxScore=${maxScore}`;
         },
         copyToClipboard() {
             this.$refs.embeded.select();
@@ -271,6 +318,7 @@ export default {
         selectEmbed(type) {
             this.embedType = type;
             this.step = 4;
+            this.updateCampaign();
         }
     },
     mounted() {

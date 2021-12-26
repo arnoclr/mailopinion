@@ -11,6 +11,12 @@ service cloud.firestore {
         if request.auth.uid == uid;
     }
 
+    // allow user to create a campaign
+    match /users/{uid}/campaigns/{cid} {
+      allow write: 
+        if request.auth.uid == uid;
+    }
+
     // allow authenticated user to add record in any campaign
     match /users/{uid}/campaigns/{cid}/records/{rid} {
       allow read, write: 

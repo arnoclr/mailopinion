@@ -63,7 +63,7 @@ export default {
     mounted() {
         const urlParams = new URLSearchParams(window.location.search);
         this.userId = urlParams.get('userId') || urlParams.get('uid');
-        this.campaignId = urlParams.get('campaignName') || urlParams.get('cid');
+        this.campaignId = urlParams.get('campaignName') || urlParams.get('cpid');
         this.maxScore = urlParams.get('maxScore') || 2;
         this.score = parseInt(urlParams.get('score')) || null;
 
