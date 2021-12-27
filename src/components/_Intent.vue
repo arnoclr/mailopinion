@@ -16,6 +16,16 @@
 
             <div class="mo-confirmation" v-if="hasVoted">
                 <p>{{ $t('intent.thanks') }}</p>
+                <div class="mo-vote-addtext" v-if="!textFeedbackSent">
+                    <div class="mo-textfield">
+                        <input class="mo-textfield__input" type="text" id="textFeedback" placeholder=" "
+                            v-model="textFeedback">
+                        <label class="mo-textfield__label" for="textFeedback">Add something ?</label>
+                        <div class="mo-textfield__underline"></div>
+                    </div>
+                    <p></p>
+                    <button class="mo-btn mo-btn--backcolored mo-btn--atleft" @click="sendText" :disabled="textFeedbackSending">Send</button>
+                </div>
             </div>
 
             <div class="mo-confirmation mo-confirmation--error" v-if="error">
@@ -28,7 +38,7 @@
 
 <script>
 import { signInAnonymously, onAuthStateChanged } from "firebase/auth";
-import { doc, setDoc, serverTimestamp } from "firebase/firestore"; 
+import { doc, setDoc, updateDoc, serverTimestamp } from "firebase/firestore"; 
 import { auth, db } from "~/firebase.js";
 
 export default {
@@ -41,7 +51,10 @@ export default {
             isSignedIn: false,
             isVoting: false,
             hasVoted: false,
-            error: null
+            error: null,
+            textFeedback: '',
+            textFeedbackSending: false,
+            textFeedbackSent: false
         }
     },
     methods: {
@@ -58,6 +71,16 @@ export default {
                 this.error = error;
                 this.isVoting = false;
             }
+        },
+        async sendText() {
+            this.textFeedbackSending = true;
+
+            await updateDoc(doc(db, "users", this.userId, "campaigns", this.campaignId, "records", this.$user.uid), {
+                comment: this.textFeedback,
+            });
+
+            this.textFeedbackSending = false;
+            this.textFeedbackSent = true;
         }
     },
     mounted() {
