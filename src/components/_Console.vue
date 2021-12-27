@@ -14,6 +14,15 @@
 
         <div id="chart1"></div>
 
+        <div class="" v-if="comments.length > 0">
+            <p>Last comments</p>
+            <ul>
+                <li v-for="record in comments" :key="record.id">
+                    <p>{{ record.comment }}</p>
+                </li>
+            </ul>
+        </div>
+
     </div>
 </template>
 
@@ -31,6 +40,7 @@ export default {
             campaignName: '',
             chartLoaded: false,
             isSignedIn: false,
+            comments: []
         }
     },
     methods: {
@@ -50,6 +60,15 @@ export default {
 
             return querySnapshot.size;
         },
+        async fetchComments() {
+            const q = query(collection(db, "users", this.$user.uid, "campaigns", this.campaignName, "records"), orderBy('comment', 'asc'), orderBy("createdAt", "desc"), limit(10));
+
+            const querySnapshot = await getDocs(q);
+
+            querySnapshot.forEach(doc => {
+                this.comments.push({...doc.data(), id: doc.id});
+            });
+        },
         async drawChart() {
             if (!this.chartLoaded) return;
 
@@ -62,6 +81,8 @@ export default {
             ]);
             const pie_1_chart = new GoogleCharts.api.visualization.PieChart(document.getElementById('chart1'));
             pie_1_chart.draw(data);
+
+            this.fetchComments();
         }
     },
     mounted() {
@@ -69,7 +90,7 @@ export default {
 
         // read url params
         const urlParams = new URLSearchParams(window.location.search);
-        this.campaignName = urlParams.get('campaignName') || urlParams.get('cn') || '';
+        this.campaignName = urlParams.get('campaignName') || urlParams.get('cn') || urlParams.get('cpid') || '';
     }
 }
 </script>
