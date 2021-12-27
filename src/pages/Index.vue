@@ -79,6 +79,10 @@
     </main>
 
     <Footer />
+
+    <ClientOnly>
+      <CLogEvent name="landing" />
+    </ClientOnly>
   </div>
 </template>
 
@@ -88,7 +92,8 @@ import Footer from '~/components/Footer.vue'
 
 export default {
   components: {
-    Navbar, Footer
+    Navbar, Footer,
+    CLogEvent: () => import ('~/components/LogEvent.vue'),
   },
   metaInfo: {
     title: 'Get feedbacks on your emails'

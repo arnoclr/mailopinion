@@ -123,6 +123,10 @@
         </div>
 
         <div class="mo-toast" ref="toast">Copied to clipboard !</div>
+
+        <ClientOnly>
+            <CLogEvent name="install" />
+        </ClientOnly>
     </div>
 </template>
 
@@ -140,6 +144,7 @@ const scoresTable = {
 export default {
     components: {
         Auth: () => import ('~/components/Auth.vue'),
+        CLogEvent: () => import ('~/components/LogEvent.vue'),
     },
     data() {
         return {
@@ -330,14 +335,6 @@ export default {
             this.step = 4;
             this.updateCampaign();
         }
-    },
-    mounted() {
-        const urlParams = new URLSearchParams(window.location.search)
-        let src = urlParams.get('s') ? atob(decodeURIComponent(urlParams.get('s'))) : null
-        console.log(src)
-        logEvent(analytics, 'install', {
-            ref: src
-        })
     }
 }
 </script>

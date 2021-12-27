@@ -22,6 +22,16 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   Vue.prototype.$user = null
   Vue.prototype.$isSignedIn = false
 
+  if (process.isClient) {
+    const setQueryStringParameter = (name, value) => {
+      const params = new URLSearchParams(window.location.search);
+      params.set(name, value);
+      window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?${params}`));
+    }
+
+    Vue.prototype.$setQueryStringParameter = setQueryStringParameter
+  }
+
   // translations
   appOptions.i18n.setLocaleMessage('fr-fr', require('./locales/fr-fr.json'))
   appOptions.i18n.setLocaleMessage('en-us', require('./locales/en-us.json'))

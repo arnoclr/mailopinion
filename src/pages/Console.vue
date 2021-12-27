@@ -2,7 +2,7 @@
   <div>
     <Navbar />
 
-    <main class="mo-container">
+    <main>
       <ClientOnly>
         <Console />
       </ClientOnly>

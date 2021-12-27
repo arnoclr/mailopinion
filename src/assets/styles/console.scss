@@ -1,0 +1,41 @@
+.mo-divided {
+    display: grid;
+    grid-template-columns: 278px 1fr;
+    gap: 16px;
+
+    @media screen and (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.mo-drawer {
+    box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.20);
+}
+
+.mo-campaignslist {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    &__item {
+        padding: 12px 16px;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #323232;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #eee;
+        }
+    }
+}
+
+.mo-empty {
+    padding: 32px 0;
+    width: 100%;
+    text-align: center;
+
+    &__icon {
+        color: #989898;
+        font-size: 98px !important;
+    }
+}
