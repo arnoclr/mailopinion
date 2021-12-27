@@ -121,6 +121,8 @@
                 </div>
             </div>
         </div>
+
+        <div class="mo-toast" ref="toast">Copied to clipboard !</div>
     </div>
 </template>
 
@@ -308,12 +310,20 @@ export default {
             }, 300);
         },
         generateUrlForScore(score, maxScore) {
-            return `https://mailopinion.web.app/intent/?score=${score}&cpid=${encodeURIComponent(this.campaignName)}&uid=${this.$user.uid}&maxScore=${maxScore}`;
+            return `https://mailopinion.web.app${this.$tp('/intent/')}?score=${score}&cpid=${encodeURIComponent(this.campaignName)}&uid=${this.$user.uid}&maxScore=${maxScore}`;
         },
         copyToClipboard() {
             this.$refs.embeded.select();
             document.execCommand('copy');
-            alert('Copied to clipboard');
+            this.showToast('Copied to clipboard');
+        },
+        showToast(message) {
+            this.$refs.toast.classList.add('js-active');
+            this.$refs.toast.innerText = message;
+
+            setTimeout(() => {
+                this.$refs.toast.classList.remove('js-active');
+            }, 5000);
         },
         selectEmbed(type) {
             this.embedType = type;
