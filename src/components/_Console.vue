@@ -31,6 +31,7 @@
                 </p>
             </div>
 
+            <span class="mo-chart-percentage">{{ globalScore }} %</span>
             <div class="mo-chart" :style="graphGridCSS">
                 <div v-for="(score, index) in graphData" :key="index" :class="'mo-chart__bar _' + index" :title="score + ' votes'"></div>
             </div>
@@ -71,6 +72,18 @@ export default {
             empty: false,
             graphData: [0, 0, 0],
             graphGridCSS: ""
+        }
+    },
+    computed: {
+        globalScore() {
+            let average = 0;
+            let length = 0;
+            for (let i = 0; i < this.graphData.length; i++) {
+                average += this.graphData[i] * i;
+                length += this.graphData[i];
+            }
+            console.log(average, length);
+            return Math.round((average / length) / (this.graphData.length - 1) * 100);
         }
     },
     methods: {
@@ -132,7 +145,7 @@ export default {
             this.graphGridCSS = "grid-template-columns: ";
 
             for (let i = 0; i < 3; i++) {
-                this.graphData[i] = await this.getResultsForScore(i);
+                this.$set(this.graphData, i, await this.getResultsForScore(i));
                 this.graphGridCSS += `${this.graphData[i]}fr `;
             }
             
