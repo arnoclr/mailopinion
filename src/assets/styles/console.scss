@@ -1,7 +1,7 @@
 .mo-divided {
     display: grid;
+    width: 100%;
     grid-template-columns: 278px 1fr;
-    gap: 16px;
 
     @media screen and (max-width: 768px) {
         grid-template-columns: 1fr;
@@ -10,6 +10,10 @@
 
 .mo-drawer {
     box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.20);
+}
+
+.mo-drawer-aside {
+    padding: 22px;
 }
 
 .mo-campaignslist {
@@ -42,6 +46,37 @@
     &__icon {
         color: #989898;
         font-size: 98px !important;
+    }
+}
+
+.mo-chart {
+    width: 100%;
+    height: 28px;
+    background-color: #eee;
+    display: grid;
+    grid-template-columns: 0 0 0 1fr;
+    box-sizing: border-box;
+
+    &__bar {
+        height: 100%;
+        width: 100%;
+        border: 1px dotted transparent;
+
+        &:hover {
+            border-color: #000;
+        }
+    }
+
+    ._0 {
+        background-color: #f44336;
+    }
+
+    ._1 {
+        background-color: #f19822;
+    }
+
+    ._2 {
+        background-color: #4caf50;
     }
 }
 

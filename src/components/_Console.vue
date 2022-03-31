@@ -19,7 +19,7 @@
                 </li>
             </ul>
         </div>
-        <div class="">
+        <div class="mo-drawer-aside">
             <p v-if="campaignData && campaignData.embedQuestion.length > 0">
                 {{ campaignData.embedQuestion }}
             </p>
@@ -31,7 +31,9 @@
                 </p>
             </div>
 
-            <div id="chart1"></div>
+            <div class="mo-chart" :style="graphGridCSS">
+                <div v-for="(score, index) in graphData" :key="index" :class="'mo-chart__bar _' + index" :title="score + ' votes'"></div>
+            </div>
 
             <div class="" v-if="comments.length > 0">
                 <p>{{ $t('console.data.comments') }}</p>
@@ -53,7 +55,6 @@
 <script>
 import { collection, doc, query, orderBy, getDocs, getDoc, where, limit, deleteDoc } from "firebase/firestore"
 import { db } from "~/firebase";
-import { GoogleCharts } from "google-charts";
 
 export default {
     components: {
@@ -63,12 +64,13 @@ export default {
     data() {
         return {
             campaignName: '',
-            chartLoaded: false,
             isSignedIn: false,
             comments: [],
             campaignData: null,
             campaigns: [],
             empty: false,
+            graphData: [0, 0, 0],
+            graphGridCSS: ""
         }
     },
     methods: {
@@ -78,9 +80,6 @@ export default {
             this.$user = user;
             this.fetchCampaigns();
             this.drawChart();
-        },
-        gcReady() {
-            this.chartLoaded = true;
         },
         async getResultsForScore(score) {
             const q = query(collection(db, "users", this.$user.uid, "campaigns", this.campaignName, "records"), where("score", "==", score), orderBy("createdAt", "desc"), limit(100));
@@ -130,34 +129,18 @@ export default {
             this.drawChart();
         },
         async drawChart() {
-            if (!this.chartLoaded) return;
+            this.graphGridCSS = "grid-template-columns: ";
 
-            const graphData = [
-                ['Score', 'Number of votes'],
-                ['1', await this.getResultsForScore(1)],
-                ['2', await this.getResultsForScore(2)],
-                ['3', await this.getResultsForScore(3)]
-            ]
-
-            // Standard google charts functionality is available as GoogleCharts.api after load
-            const data = GoogleCharts.api.visualization.arrayToDataTable(graphData);
-            const pie_1_chart = new GoogleCharts.api.visualization.PieChart(document.getElementById('chart1'));
-            pie_1_chart.draw(data);
-
-            let empty = true
-            for (let i = 1; i < graphData.length; i++) {
-                if (graphData[i][1] > 0) {
-                    empty = false
-                }
+            for (let i = 0; i < 3; i++) {
+                this.graphData[i] = await this.getResultsForScore(i);
+                this.graphGridCSS += `${this.graphData[i]}fr `;
             }
-
-            this.empty = empty
+            
+            this.empty = this.graphData.every(item => item === 0);
             this.fetchComments();
         }
     },
     mounted() {
-        GoogleCharts.load(this.gcReady);
-
         // read url params
         const urlParams = new URLSearchParams(window.location.search);
         this.campaignName = urlParams.get('campaignName') || urlParams.get('cn') || urlParams.get('cpid') || '';

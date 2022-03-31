@@ -9,7 +9,6 @@
   "dependencies": {
     "btoa": "^1.2.1",
     "firebase": "^9.6.1",
-    "google-charts": "^2.0.0",
     "gridsome": "^0.7.0",
     "gridsome-plugin-i18n": "^1.6.0"
   },
