@@ -90,5 +90,16 @@
         "loggedIn": "Vous êtes déjà connecté",
         "signOut": "Se déconnecter",
         "signInWithGoogle": "Se connecter avec Google"
+    },
+    "console": {
+        "data": {
+            "comments": "Derniers commentaires",
+            "commentsEmpty": "Aucun commentaire",
+            "dataEmpty": "Aucune donnée"
+        },
+        "actions": {
+            "delete": "Supprimer",
+            "deleteConfirm": "Êtes-vous sûr de vouloir supprimer cette campagne ?"
+        }
     }
 }

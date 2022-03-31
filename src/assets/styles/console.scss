@@ -26,6 +26,11 @@
         &:hover {
             background-color: #eee;
         }
+
+        &[aria-selected="true"] {
+            background-color: #eee;
+            color: $color-primary;
+        }
     }
 }
 

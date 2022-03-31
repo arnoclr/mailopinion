@@ -14,7 +14,7 @@
             </div>
 
             <ul class="mo-campaignslist" style="margin-top: 36px">
-                <li class="mo-campaignslist__item" v-for="campaign in campaigns" :key="campaign.id" @click="setCampaign(campaign.id)">
+                <li class="mo-campaignslist__item" v-for="campaign in campaigns" :key="campaign.id" @click="setCampaign(campaign.id)" :aria-selected="campaign.id == campaignName">
                     {{ campaign.label }}
                 </li>
             </ul>
@@ -27,20 +27,23 @@
             <div class="mo-empty" v-if="empty">
                 <i class="mo-empty__icon material-icons">error</i>
                 <p class="mo-empty__text">
-                    No data available
+                    {{ $t('console.data.dataEmpty') }}
                 </p>
             </div>
 
             <div id="chart1"></div>
 
             <div class="" v-if="comments.length > 0">
-                <p>Last comments</p>
+                <p>{{ $t('console.data.comments') }}</p>
                 <ul>
                     <li v-for="record in comments" :key="record.id">
                         <p>{{ record.comment }}</p>
                     </li>
                 </ul>
             </div>
+            <p v-else>{{ $t('console.data.commentsEmpty') }}</p>
+
+            <button class="mo-btn" @click="deleteCampaign">{{ $t('console.actions.delete') }}</button>
         </div>
 
         <CLogEvent name="console" />
@@ -48,7 +51,7 @@
 </template>
 
 <script>
-import { collection, doc, query, orderBy, getDocs, getDoc, where, limit } from "firebase/firestore"
+import { collection, doc, query, orderBy, getDocs, getDoc, where, limit, deleteDoc } from "firebase/firestore"
 import { db } from "~/firebase";
 import { GoogleCharts } from "google-charts";
 
@@ -100,11 +103,22 @@ export default {
 
             this.campaignData = docRef.data();
         },
+        async deleteCampaign() {
+            if (confirm(this.$t('console.actions.deleteConfirm'))) {
+                await deleteDoc(doc(db, "users", this.$user.uid, "campaigns", this.campaignName));
+                this.campaignName = '';
+                this.campaignData = null;
+                this.comments = [];
+                this.empty = false;
+                this.fetchCampaigns();
+            }
+        },
         async fetchCampaigns() {
             const q = query(collection(db, "users", this.$user.uid, "campaigns"), orderBy("createdAt", "desc"), limit(25));
 
             const querySnapshot = await getDocs(q);
 
+            this.campaigns = [];
             querySnapshot.forEach(doc => {
                 this.campaigns.push({...doc.data(), id: doc.id});
             });
