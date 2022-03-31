@@ -44,3 +44,37 @@
         font-size: 98px !important;
     }
 }
+
+.mo-comments {
+    list-style: none;
+    margin: 32px 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+
+    &__comment {
+        position: relative;
+        max-width: 320px;
+        padding: 12px 22px;
+        background-color: #eee;
+
+        &::after {
+            content: "";
+            display : inline-block;
+            position: absolute;
+            left: 0;
+            bottom: -12px;
+            height : 0;
+            width : 0;
+            border-top : 12px solid #eee;
+            border-right : 12px solid transparent;
+        }
+
+        p {
+            margin: 0;
+            font-size: 14px;
+            color: #323232;
+        }
+    }
+}

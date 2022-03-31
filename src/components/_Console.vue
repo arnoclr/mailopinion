@@ -35,8 +35,8 @@
 
             <div class="" v-if="comments.length > 0">
                 <p>{{ $t('console.data.comments') }}</p>
-                <ul>
-                    <li v-for="record in comments" :key="record.id">
+                <ul class="mo-comments">
+                    <li class="mo-comments__comment" v-for="record in comments" :key="record.id">
                         <p>{{ record.comment }}</p>
                     </li>
                 </ul>
