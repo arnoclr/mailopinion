@@ -85,7 +85,7 @@
                         </div>
                         <div class="mo-textfield" v-if="embedType == 'question'">
                             <input class="mo-textfield__input" type="text" id="embedQuestion"
-                            placeholder=" " v-model="embedQuestion">
+                            placeholder=" " v-model="embedQuestion" @keyup="embedQuestionDebounce">
                             <label class="mo-textfield__label" for="embedQuestion">Question</label>
                             <div class="mo-textfield__underline"></div>
                         </div>
@@ -140,6 +140,8 @@ const scoresTable = {
     "smileys": 2,
     "question": 1
 }
+
+let embedQuestionTimeout = null;
 
 export default {
     components: {
@@ -304,6 +306,14 @@ export default {
                 maxScore: scoresTable[this.embedType],
                 embedQuestion: this.embedQuestion
             });
+        },
+        embedQuestionDebounce() {
+            clearTimeout(embedQuestionTimeout);
+
+            // Make a new timeout set to go off in 800ms
+            embedQuestionTimeout = setTimeout(() => {
+                this.updateCampaign();
+            }, 400);
         },
         checkTimeOut() {
             if (this.timer) {
