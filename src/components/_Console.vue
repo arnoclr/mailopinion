@@ -140,6 +140,7 @@ export default {
             this.campaignName = id;
             this.comments = [];
             this.drawChart();
+            this.fetchCampaign();
         },
         async drawChart() {
             this.graphGridCSS = "grid-template-columns: ";
