@@ -58,7 +58,8 @@
             },
             "2": {
                 "title": "Créez une campagne",
-                "content": "Choisissez un nom unique pour votre campagne."
+                "content": "Choisissez un nom unique pour votre campagne.",
+                "options": "Options avancées"
             },
             "3": {
                 "title": "Choisissez le type de formulaire",

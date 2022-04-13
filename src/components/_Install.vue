@@ -47,7 +47,6 @@
                             <div class="mo-textfield__disclaimer" v-show="!campaignNameAvailable">{{ $t('setup.nameNotAvailable') }}</div>
                         </div>
                     </div>
-                    <span @click="advancedOptions = true" v-else>Show advanced options</span>
                     <p>
                         <!-- <button 
                             class="mo-btn mo-btn--small mo-btn--atleft" 
@@ -55,6 +54,9 @@
                         <button 
                             class="mo-btn mo-btn--small mo-btn--backcolored mo-btn--atleft" 
                             @click="registerCampaign" :disabled="step > 2">{{ $t('setup.steps.next') }}</button>
+                        <button 
+                            class="mo-btn mo-btn--small mo-btn--atleft" 
+                            @click="advancedOptions = true" :disabled="step > 2">{{ $t('setup.steps.2.options') }}</button>
                     </p>
                 </div>
             </div>

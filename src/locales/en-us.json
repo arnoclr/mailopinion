@@ -58,7 +58,8 @@
             },
             "2": {
                 "title": "Create a campaign",
-                "content": "Choose an unique name for your campaign."
+                "content": "Choose an unique name for your campaign.",
+                "options": "Advanced options"
             },
             "3": {
                 "title": "Choose the type of feedback",
